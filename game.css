@@ -1,134 +1,100 @@
-/* ===== game.css ===== */
-.game-wrapper {
-    display: flex;
+#game-container {
+    position: relative;
+    width: 100vw;
     height: 100vh;
-    position: relative;
 }
 
-.canvas-container {
-    position: relative;
-    flex-grow: 1;
-    background: #000;
-    overflow: hidden;
-    cursor: crosshair;
-}
-
-/* Canvas Styling */
 canvas {
     display: block;
-    box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
+    background: #0b0b15;
 }
 
-/* Ad Slots - Slightly transparent */
-.ad-slot {
-    background: rgba(0,0,0,0.8);
-    border: 1px dashed #333;
+.hud-top {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #555;
+    justify-content: space-between;
+    pointer-events: none;
 }
 
-.horizontal { width: 100%; height: 90px; position: absolute; top: 0; z-index: 10; pointer-events: none; }
-.vertical { width: 160px; height: 100%; display: none; border-right: 1px solid #333; }
+.hud-top button {
+    pointer-events: auto;
+    background: rgba(255,0,0,0.3);
+    border: 1px solid red;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+}
 
-/* Mobile Logic for Ads */
-@media (min-width: 1024px) {
-    .vertical { display: flex; }
-    .game-wrapper { height: 100vh; }
+.hotbar {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    background: rgba(255,255,255,0.1);
+    padding: 10px;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.slot {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #555;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.slot.active {
+    transform: scale(1.2);
+    box-shadow: 0 0 15px white;
+    border: 2px solid white !important;
+}
+
+/* Mobile Controls */
+.mobile-controls {
+    display: none; /* Show only on mobile via media query */
+    position: absolute;
+    bottom: 80px;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 20px;
+    pointer-events: none; /* Let clicks pass */
+}
+
+.d-pad, .action-btn {
+    pointer-events: auto;
+}
+
+.d-pad button, .action-btn button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+    font-size: 1.2rem;
+}
+
+.d-pad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.middle-row { display: flex; gap: 50px; }
+
+.action-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 @media (max-width: 768px) {
-    .horizontal { height: 60px; } 
-    /* Hide top ad on very small screens to give space for game */
-    #ad-header { opacity: 0.6; pointer-events: none; } 
+    .mobile-controls { display: flex; }
+    .hotbar { bottom: 10px; }
 }
-
-/* Pause Menu */
-.overlay {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(15, 12, 41, 0.9); /* Matching theme */
-    backdrop-filter: blur(5px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
-}
-
-.menu-content button {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    margin: 15px 0;
-    background: transparent;
-    border: 2px solid var(--neon-blue);
-    color: #fff;
-    font-size: 1.1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.menu-content button:hover {
-    background: var(--neon-blue);
-    color: #000;
-}
-/* ===== game.css (Add/Replace this) ===== */
-.icon-btn {
-    background: rgba(0,0,0,0.6);
-    border: 1px solid var(--neon-blue);
-    color: #fff;
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    margin-left: 10px;
-    transition: 0.3s;
-}
-
-.icon-btn:hover {
-    background: var(--neon-blue);
-    color: #000;
-    box-shadow: 0 0 10px var(--neon-blue);
-}
-
-.guide-content {
-    max-width: 400px;
-    width: 90%;
-    text-align: left;
-    border: 1px solid var(--neon-purple);
-}
-
-.guide-content h2 {
-    text-align: center;
-    color: var(--neon-blue);
-    margin-bottom: 20px;
-}
-
-.guide-list {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 25px;
-}
-
-.guide-list li {
-    margin: 15px 0;
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.guide-list i {
-    color: var(--neon-purple);
-    width: 20px;
-    text-align: center;
-}
-
-.small-btn {
-    margin-top: 10px;
-    padding: 10px 30px;
-    font-size: 1rem;
-    width: 100%;
-}
-
