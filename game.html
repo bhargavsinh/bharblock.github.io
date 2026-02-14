@@ -7,25 +7,31 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="game.css">
     <link rel="stylesheet" href="controls.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div id="ad-header" class="ad-slot horizontal"></div>
-
     <div class="game-wrapper">
-        <div id="ad-sidebar" class="ad-slot vertical"></div>
-
         <div class="canvas-container">
             <canvas id="gameCanvas"></canvas>
             
             <div id="ui-layer">
                 <div class="hud-top">
                     <div class="stat-box">🧠 Focus: <span id="score-val">0</span></div>
-                    <div class="stat-box">⏱ Time: <span id="time-val">00:00</span></div>
+                    <button id="btn-help" class="icon-btn"><i class="fas fa-question"></i></button>
+                    <button id="btn-pause" class="icon-btn"><i class="fas fa-pause"></i></button>
                 </div>
 
-                <div id="pattern-challenge" class="glass-panel hidden">
-                    <h4>Memory Target</h4>
-                    <canvas id="miniCanvas" width="100" height="100"></canvas>
+                <div id="guide-modal" class="overlay">
+                    <div class="glass-panel guide-content">
+                        <h2>🎮 How to Play</h2>
+                        <ul class="guide-list">
+                            <li><i class="fas fa-arrows-alt"></i> <b>Move:</b> WASD or Arrow Keys</li>
+                            <li><i class="fas fa-mouse-pointer"></i> <b>Build:</b> Left Click</li>
+                            <li><i class="fas fa-eraser"></i> <b>Destroy:</b> Right Click</li>
+                            <li><i class="fas fa-brain"></i> <b>Goal:</b> Replicate patterns & build creatively!</li>
+                        </ul>
+                        <button id="btn-start" class="cta-button small-btn">Start Playing</button>
+                    </div>
                 </div>
 
                 <div class="hud-bottom">
@@ -35,14 +41,6 @@
                         <div class="slot" data-type="3" style="background: #607d8b;"></div>
                         <div class="slot" data-type="4" style="background: #ff9800;"></div>
                     </div>
-                </div>
-            </div>
-
-            <div id="pause-menu" class="overlay hidden">
-                <div class="glass-panel menu-content">
-                    <h2>Paused</h2>
-                    <button id="btn-resume">Resume</button>
-                    <button id="btn-quit" onclick="window.location.href='index.html'">Quit</button>
                 </div>
             </div>
         </div>
