@@ -2,51 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BharBlock - Playing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NeonBuilder - Playing</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="game.css">
-    <link rel="stylesheet" href="controls.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="game-wrapper">
-        <div class="canvas-container">
-            <canvas id="gameCanvas"></canvas>
-            
-            <div id="ui-layer">
-                <div class="hud-top">
-                    <div class="stat-box">🧠 Focus: <span id="score-val">0</span></div>
-                    <button id="btn-help" class="icon-btn"><i class="fas fa-question"></i></button>
-                    <button id="btn-pause" class="icon-btn"><i class="fas fa-pause"></i></button>
-                </div>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        
+        <div class="hud-top">
+            <div class="score">⚡ Energy: <span id="energy">100</span>%</div>
+            <button id="btn-menu" onclick="location.href='index.html'">EXIT</button>
+        </div>
 
-                <div id="guide-modal" class="overlay">
-                    <div class="glass-panel guide-content">
-                        <h2>🎮 How to Play</h2>
-                        <ul class="guide-list">
-                            <li><i class="fas fa-arrows-alt"></i> <b>Move:</b> WASD or Arrow Keys</li>
-                            <li><i class="fas fa-mouse-pointer"></i> <b>Build:</b> Left Click</li>
-                            <li><i class="fas fa-eraser"></i> <b>Destroy:</b> Right Click</li>
-                            <li><i class="fas fa-brain"></i> <b>Goal:</b> Replicate patterns & build creatively!</li>
-                        </ul>
-                        <button id="btn-start" class="cta-button small-btn">Start Playing</button>
-                    </div>
-                </div>
+        <div class="hotbar">
+            <div class="slot active" data-id="1" style="border-color:#0ff; background:#0ff;"></div>
+            <div class="slot" data-id="2" style="border-color:#f0f; background:#f0f;"></div>
+            <div class="slot" data-id="3" style="border-color:#ff0; background:#ff0;"></div>
+            <div class="slot" data-id="4" style="border-color:#0f0; background:#0f0;"></div>
+        </div>
 
-                <div class="hud-bottom">
-                    <div class="hotbar">
-                        <div class="slot active" data-type="1" style="background: #4caf50;"></div>
-                        <div class="slot" data-type="2" style="background: #795548;"></div>
-                        <div class="slot" data-type="3" style="background: #607d8b;"></div>
-                        <div class="slot" data-type="4" style="background: #ff9800;"></div>
-                    </div>
+        <div class="mobile-controls">
+            <div class="d-pad">
+                <button id="up"><i class="fas fa-caret-up"></i></button>
+                <div class="middle-row">
+                    <button id="left"><i class="fas fa-caret-left"></i></button>
+                    <button id="right"><i class="fas fa-caret-right"></i></button>
                 </div>
+                <button id="down"><i class="fas fa-caret-down"></i></button>
+            </div>
+            <div class="action-btn">
+                <button id="action-build">BUILD</button>
+                <button id="action-break">BREAK</button>
             </div>
         </div>
     </div>
 
-    <script src="ads.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <script src="world.js"></script>
     <script src="player.js"></script>
     <script src="engine.js"></script>
