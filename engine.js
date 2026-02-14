@@ -159,4 +159,100 @@ class Engine {
         requestAnimationFrame(() => this.loop());
     }
 }
+/* ===== engine.js ===== */
+class Engine {
+    constructor() {
+        this.canvas = document.getElementById('gameCanvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.world = new World();
+        this.player = new Player(this.world);
+        
+        this.camX = 0;
+        this.camY = 0;
+        
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+    }
+
+    resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+    }
+
+    start() {
+        this.world.generate();
+        this.loop();
+    }
+
+    update(input) {
+        if(input) {
+            this.player.update(input);
+        }
+
+        // Camera Follow Logic
+        const targetX = this.player.x - this.canvas.width / 2;
+        const targetY = this.player.y - this.canvas.height / 2;
+        this.camX += (targetX - this.camX) * 0.1;
+        this.camY += (targetY - this.camY) * 0.1;
+    }
+
+    draw() {
+        // Clear Screen (Dark Background)
+        this.ctx.fillStyle = '#050510';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+        this.ctx.save();
+        this.ctx.translate(-this.camX, -this.camY);
+
+        // GRID LINES (વધારે દેખાય તેવી કરી)
+        const startX = Math.floor(this.camX / this.world.tileSize);
+        const startY = Math.floor(this.camY / this.world.tileSize);
+        const w = Math.ceil(this.canvas.width / this.world.tileSize) + 1;
+        const h = Math.ceil(this.canvas.height / this.world.tileSize) + 1;
+
+        this.ctx.strokeStyle = '#333344'; // Lighter Grid Color
+        this.ctx.lineWidth = 1;
+
+        for (let y = startY; y < startY + h; y++) {
+            for (let x = startX; x < startX + w; x++) {
+                const cx = x * this.world.tileSize;
+                const cy = y * this.world.tileSize;
+                
+                // Draw Grid
+                this.ctx.strokeRect(cx, cy, this.world.tileSize, this.world.tileSize);
+
+                // Draw Blocks
+                const block = this.world.getBlock(x, y);
+                if (block > 0) {
+                    this.ctx.shadowBlur = 15;
+                    this.ctx.shadowColor = this.world.colors[block];
+                    this.ctx.fillStyle = this.world.colors[block];
+                    this.ctx.fillRect(cx + 2, cy + 2, this.world.tileSize - 4, this.world.tileSize - 4);
+                    this.ctx.shadowBlur = 0;
+                }
+            }
+        }
+
+        // DRAW PLAYER (White Circle with Glow)
+        this.ctx.shadowBlur = 20;
+        this.ctx.shadowColor = 'white';
+        this.ctx.fillStyle = 'white';
+        this.ctx.beginPath();
+        this.ctx.arc(this.player.x, this.player.y, 10, 0, Math.PI * 2);
+        this.ctx.fill();
+        this.ctx.shadowBlur = 0;
+
+        this.ctx.restore();
+    }
+
+    loop() {
+        // Error Prevention: Check if Input exists
+        if (typeof Input !== 'undefined') {
+            this.update(Input.state);
+        }
+        this.draw();
+        requestAnimationFrame(() => this.loop());
+    }
+}
+
 
