@@ -74,3 +74,61 @@ canvas {
     background: var(--neon-blue);
     color: #000;
 }
+/* ===== game.css (Add/Replace this) ===== */
+.icon-btn {
+    background: rgba(0,0,0,0.6);
+    border: 1px solid var(--neon-blue);
+    color: #fff;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: 0.3s;
+}
+
+.icon-btn:hover {
+    background: var(--neon-blue);
+    color: #000;
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.guide-content {
+    max-width: 400px;
+    width: 90%;
+    text-align: left;
+    border: 1px solid var(--neon-purple);
+}
+
+.guide-content h2 {
+    text-align: center;
+    color: var(--neon-blue);
+    margin-bottom: 20px;
+}
+
+.guide-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 25px;
+}
+
+.guide-list li {
+    margin: 15px 0;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.guide-list i {
+    color: var(--neon-purple);
+    width: 20px;
+    text-align: center;
+}
+
+.small-btn {
+    margin-top: 10px;
+    padding: 10px 30px;
+    font-size: 1rem;
+    width: 100%;
+}
+
