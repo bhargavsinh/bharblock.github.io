@@ -1,3 +1,4 @@
+/* ===== world.js ===== */
 class World {
     constructor() {
         this.tileSize = 40;
@@ -7,32 +8,37 @@ class World {
         
         // Colors for blocks (Neon Theme)
         this.colors = {
-            1: '#00f3ff', // Cyan Neon
-            2: '#bc13fe', // Purple Neon
-            3: '#ffea00', // Yellow Neon
-            4: '#0aff0a'  // Green Neon
+            1: '#00f3ff', // Cyan
+            2: '#bc13fe', // Purple
+            3: '#ffea00', // Yellow
+            4: '#0aff0a'  // Green
         };
     }
 
     generate() {
-        // Create a simple floor pattern
+        // ૧. આખો નકશો ભરો (More Blocks!)
         for (let y = 0; y < this.height; y++) {
             for (let x = 0; x < this.width; x++) {
-                if (Math.random() > 0.95) {
+                // 85% જગ્યાએ બ્લોક હશે (પહેલા 5% હતા)
+                if (Math.random() > 0.85) { 
                     this.map[y][x] = Math.floor(Math.random() * 4) + 1;
                 }
             }
         }
-        // Spawn Area Clear
-        for(let y=45; y<55; y++) {
-            for(let x=45; x<55; x++) {
+        
+        // ૨. સેન્ટર (Spawn Area) ખાલી રાખો જેથી પ્લેયર ફસાઈ ન જાય
+        // પણ હવે થોડું નાનું રાખો (5x5)
+        const cx = Math.floor(this.width / 2);
+        const cy = Math.floor(this.height / 2);
+        for(let y = cy - 3; y <= cy + 3; y++) {
+            for(let x = cx - 3; x <= cx + 3; x++) {
                 this.map[y][x] = 0;
             }
         }
     }
 
     getBlock(x, y) {
-        if (x < 0 || x >= this.width || y < 0 || y >= this.height) return -1; // Boundary
+        if (x < 0 || x >= this.width || y < 0 || y >= this.height) return -1;
         return this.map[y][x];
     }
 
