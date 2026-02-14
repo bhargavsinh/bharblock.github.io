@@ -1,0 +1,65 @@
+.game-wrapper {
+    display: flex;
+    height: calc(100vh - 90px); /* Minus header ad height */
+}
+
+.canvas-container {
+    position: relative;
+    flex-grow: 1;
+    background: #000;
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+    image-rendering: pixelated; /* Retro crispness */
+}
+
+/* Ad Slots Styling */
+.ad-slot {
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #444;
+    font-size: 0.8rem;
+    border: 1px dashed #333;
+}
+
+.horizontal {
+    width: 100%;
+    height: 90px;
+}
+
+.vertical {
+    width: 160px;
+    height: 100%;
+    display: none; /* Hidden on mobile by default */
+}
+
+@media (min-width: 1024px) {
+    .vertical { display: flex; }
+}
+
+/* Overlay for menus */
+.overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.menu-content button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background: var(--accent);
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 4px;
+}
